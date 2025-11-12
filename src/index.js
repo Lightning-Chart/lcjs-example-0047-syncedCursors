@@ -37,7 +37,7 @@ const charts = new Array(4).fill(0).map((_, i) => {
     chart.axisX.setTickStrategy(AxisTickStrategies.DateTime)
 
     for (let iS = 0; iS < 2; iS++) {
-        const series = chart.addPointLineAreaSeries({ dataPattern: 'ProgressiveX' }).setAreaFillStyle(emptyFill)
+        const series = chart.addPointLineAreaSeries({ dataPattern: 'ProgressiveX' }).setAreaFillStyle(emptyFill).setName(`Series ${iS + 1}`)
         createProgressiveTraceGenerator()
             .setNumberOfPoints(100_000)
             .generate()
