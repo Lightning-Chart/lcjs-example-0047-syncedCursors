@@ -28,9 +28,6 @@ const charts = new Array(4).fill(0).map((_, i) => {
     const chart = lc
         .ChartXY({
             container,
-            defaultAxisX: {
-                type: 'linear-highPrecision',
-            },
             theme: (() => {
     const t = Themes[new URLSearchParams(window.location.search).get('theme') || 'darkGold'] || undefined
     return t && window.lcjsSmallView ? lcjs.scaleTheme(t, 0.5) : t
@@ -42,7 +39,10 @@ textRenderer: window.lcjsSmallView ? lcjs.htmlTextRenderer : undefined,
     chart.axisX.setTickStrategy(AxisTickStrategies.DateTime)
 
     for (let iS = 0; iS < 2; iS++) {
-        const series = chart.addPointLineAreaSeries({ dataPattern: 'ProgressiveX' }).setAreaFillStyle(emptyFill).setName(`Series ${iS + 1}`)
+        const series = chart
+            .addPointLineAreaSeries({ dataPattern: 'ProgressiveX' })
+            .setAreaFillStyle(emptyFill)
+            .setName(`Series ${iS + 1}`)
         createProgressiveTraceGenerator()
             .setNumberOfPoints(100_000)
             .generate()
